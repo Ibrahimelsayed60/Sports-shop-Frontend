@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+// Define primary, accent, and warn palettes
+$my-primary: mat.define-palette(mat.$indigo-palette);
+$my-accent: mat.define-palette(mat.$pink-palette);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+// Define the complete theme using mat.define-light-theme
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Apply theme to components
+.custom-theme {
+  @include mat.all-component-themes($custom-theme);
+
+  // Optional: Tailwind styling (ensure Tailwind is configured correctly)
+  .mdc-button, .mdc-raised-button, .mdc-stroked-button, .mdc-flat-button {
+    @apply rounded-md;
+  }
+}
