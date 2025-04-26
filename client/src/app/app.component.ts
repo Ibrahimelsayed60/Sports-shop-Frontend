@@ -3,30 +3,22 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./layout/header/header.component";
 import { HttpClient } from '@angular/common/http';
 import { Product } from './shared/models/product';
-import { Result } from './shared/models/Result';
+import { ResultDto } from './shared/models/ResultDto';
 import { Pagination } from './shared/models/pagination';
+import { ShopService } from './core/services/shop.service';
+import { Observable } from 'rxjs';
+import { ShopComponent } from "./features/shop/shop.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, ShopComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
 
-
-  baseUrl="https://localhost:7265/api/"
-  private http = inject(HttpClient);
   title = 'Tigers Shop';
-  products: Product[] = [];
 
-  ngOnInit(): void {
-    this.http.get<Result<Pagination<Product>>>(this.baseUrl + 'products').subscribe({
-      next:response => this.products = response.data.data,
-      error: error => console.log(error),
-      complete: () => console.log('complete')
-    })
-  }
 
 }
