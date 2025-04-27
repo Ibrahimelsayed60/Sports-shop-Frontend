@@ -49,6 +49,11 @@ export class ShopService {
     return this.http.get<ResultDto<Pagination<Product>>>(this.baseUrl + 'products', {params});
   }
 
+  getProduct(id: number)
+  {
+    return this.http.get<ResultDto<Product>>(this.baseUrl + 'products/' + id);
+  }
+
 
   getBrands()
   {
