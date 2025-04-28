@@ -14,6 +14,7 @@ import { MatButton } from '@angular/material/button';
 export class TestErrorComponent {
   baseUrl="https://localhost:7265/api/";
   private http = inject(HttpClient);
+  validationErrors?: string[] ;
 
   get404Error()
   {
@@ -51,7 +52,7 @@ export class TestErrorComponent {
   {
     this.http.post(this.baseUrl+'buggy/validationerror', {}).subscribe({
       next: response => console.log(response),
-      error: error => console.log(error)
+      error: error => this.validationErrors = error
     })
   }
 
