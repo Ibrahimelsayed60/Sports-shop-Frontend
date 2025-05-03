@@ -3,7 +3,11 @@
   <div class="w-3/4">
     <mat-stepper #stepper class="bg-white border border-gray-200 shadow-sm">
       <mat-step label="Address">
-        Address form
+        <div id="address-element"></div>
+        <div class="flex justify-between mt-6">
+          <button routerLink="/shop" mat-stroked-button>Continue shopping</button>
+          <button matStepperNext mat-flat-button>Next</button>
+        </div>
       </mat-step>
       <mat-step label="Shipping">
         Delivery form
