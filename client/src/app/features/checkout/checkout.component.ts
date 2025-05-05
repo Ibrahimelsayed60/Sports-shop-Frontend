@@ -16,6 +16,7 @@ import { CheckoutReviewComponent } from "./checkout-review/checkout-review.compo
 import { CartService } from '../../core/services/cart.service';
 import { CurrencyPipe, JsonPipe } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ShippingAddress } from '../../shared/models/order';
 
 @Component({
   selector: 'app-checkout',
@@ -144,8 +145,13 @@ export class CheckoutComponent implements OnInit, OnDestroy{
     }
   }
 
+  private async createOrderModel(){
+    const cart = this.cartService.cart();
+    const shippingAddress = await this.getAddressFromStripeAddress() as ShippingAddress;
+  }
 
-  private async getAddressFromStripeAddress() : Promise<Address | null> {
+
+  private async getAddressFromStripeAddress() : Promise<Address | ShippingAddress | null> {
     const result = await this.addressElement?.getValue();
     const address = result?.value.address;
 
